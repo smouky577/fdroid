@@ -1,0 +1,14 @@
+Categories:
+  - Science & Education
+License: GPL-3.0-only
+AuthorName: Dr. Baysinger
+SourceCode: https://github.com/smouky577/sound-bc
+IssueTracker: https://github.com/smouky577/sound-bc/issues
+
+Name: Sound BC
+Summary: Acoustic G1/G7 ballistic coefficient meter
+Description: |-
+  Sound BC measures the G1/G7 ballistic coefficient from the sound of the
+  shot and the sound of the gong hit, with a link to the HT-X3006 chronograph.
+
+  BC от звука на изстрела и удара в гонга.

@@ -1,0 +1,4 @@
+# GitHub repos whose latest release APK goes into the F-Droid repo (one per line)
+real-bc
+sound-bc
+slugspeed

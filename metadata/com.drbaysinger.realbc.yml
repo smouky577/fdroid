@@ -1,0 +1,14 @@
+Categories:
+  - Science & Education
+License: GPL-3.0-only
+AuthorName: Dr. Baysinger
+SourceCode: https://github.com/smouky577/real-bc
+IssueTracker: https://github.com/smouky577/real-bc/issues
+
+Name: Real BC
+Summary: Ballistic coefficient from measured velocities
+Description: |-
+  Real BC calculates the real ballistic coefficient (G1/G7) of an air-rifle
+  pellet or slug from velocities measured at different distances.
+
+  Реален BC: балистичен коефициент от измерени скорости.
