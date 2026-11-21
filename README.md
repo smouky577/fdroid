@@ -34,7 +34,7 @@ Actions → **Update F-Droid repo** → Run workflow.
 ## Нова версия на апп
 Качете нов релийз с APK (по-висок `versionCode`, подписан с `main-release.jks`) в репото на аппа. Хранилището го хваща до 24 часа, или веднага с Run workflow.
 
-SlugSpeed **1.1** е последният релийз и включва поправката „празно = дуло → мишена“.
+Последни версии: Sound BC **1.1**, Real BC **1.1**, SlugSpeed **1.2**, с новите иконки без кръг. SlugSpeed включва и поправката „празно = дуло → мишена“.
 
 ## Нов апп
 Добавете името на GitHub репото в `apps.txt` и файл `metadata/<applicationId>.yml`.
@@ -77,7 +77,7 @@ Actions → **Update F-Droid repo** → Run workflow.
 ## A new app version
 Publish a new release with an APK (higher `versionCode`, signed with `main-release.jks`) in that app’s repo. The repository picks it up within 24 hours, or immediately with Run workflow.
 
-SlugSpeed **1.1** is the latest release and includes the “empty = muzzle → target” hint fix.
+Latest versions: Sound BC **1.1**, Real BC **1.1**, SlugSpeed **1.2**, with the new icons and no circle. SlugSpeed also includes the “empty = muzzle → target” hint fix.
 
 ## A new app
 Add the GitHub repo name to `apps.txt` and a `metadata/<applicationId>.yml` file.
