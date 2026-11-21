@@ -6,7 +6,7 @@ on:
     - cron: '17 3 * * *'    # всеки ден в 05:17 българско време проверява за нови версии
 
 permissions:
-  contents: read
+  contents: write           # качва копие в черновата apk-cache; не пипа релийзите на аповете
   pages: write
   id-token: write
 
@@ -30,18 +30,69 @@ jobs:
       - name: Install fdroidserver
         run: pip install fdroidserver
 
-      - name: Download latest APKs from GitHub Releases
+      # Сваляне от релийза на апа брои +1 в GitHub. Затова всеки APK се взема оттам
+      # само първия път и се пази в черновата apk-cache на това репо. След това
+      # дневното пускане чете копието и броят на апа не мърда.
+      - name: Download only new APKs from GitHub Releases
         env:
           GH_TOKEN: ${{ github.token }}
+          SELF: ${{ github.repository }}
         run: |
+          set -euo pipefail
           mkdir -p repo
-          while read -r r; do
-            r="${r%%#*}"; r="$(echo "$r" | xargs)"
+          : > wanted.txt
+
+          if ! gh release view apk-cache --repo "$SELF" >/dev/null 2>&1; then
+            gh release create apk-cache --repo "$SELF" --draft \
+              --title "APK cache (not for install)" \
+              --notes "Internal copies. The daily job reads these so it does not download the app releases again."
+          fi
+          gh release view apk-cache --repo "$SELF" --json assets -q '.assets[].name' > cached.txt
+
+          while IFS= read -r line || [ -n "${line:-}" ]; do
+            line=${line%$'\r'}
+            r=$(printf '%s' "${line%%#*}" | xargs)
             [ -z "$r" ] && continue
-            echo "== $r"
-            gh release download --repo "smouky577/$r" --pattern '*.apk' --dir repo --clobber
+            gh release view --repo "smouky577/$r" --json assets -q '.assets[].name | select(endswith(".apk"))' > "names-$r.txt"
+            if ! grep -q . "names-$r.txt"; then
+              echo "No APK on the latest release of $r"
+              exit 1
+            fi
+            while IFS= read -r a || [ -n "${a:-}" ]; do
+              [ -z "$a" ] && continue
+              printf '%s\n' "$a" >> wanted.txt
+              if grep -qxF "$a" cached.txt; then
+                echo "== $r: $a from cache, app download count unchanged"
+                gh release download apk-cache --repo "$SELF" --pattern "$a" --dir repo --clobber
+              else
+                echo "== $r: $a first time from the app release"
+                gh release download --repo "smouky577/$r" --pattern "$a" --dir repo --clobber
+                gh release upload apk-cache "repo/$a" --repo "$SELF" --clobber
+              fi
+            done < "names-$r.txt"
+            rm -f "names-$r.txt"
           done < apps.txt
-          ls -l repo
+
+          for f in repo/*.apk; do
+            [ -e "$f" ] || continue
+            base=$(basename "$f")
+            grep -qxF "$base" wanted.txt || { echo "removing old $base"; rm -f "$f"; }
+          done
+
+          while IFS= read -r a || [ -n "${a:-}" ]; do
+            [ -z "$a" ] && continue
+            grep -qxF "$a" wanted.txt || { echo "removing cached $a"; gh release delete-asset apk-cache "$a" --repo "$SELF" --yes; }
+          done < cached.txt
+
+          echo "-- download counts on the app releases --"
+          while IFS= read -r line || [ -n "${line:-}" ]; do
+            line=${line%$'\r'}
+            r=$(printf '%s' "${line%%#*}" | xargs)
+            [ -z "$r" ] && continue
+            gh release view --repo "smouky577/$r" --json tagName,assets \
+              -q '"\(.tagName) " + ([.assets[] | select(.name|endswith(".apk")) | "\(.name) \(.downloadCount)"] | join(", "))'
+          done < apps.txt
+          ls -l repo/*.apk
 
       - name: Restore repo signing key
         env:

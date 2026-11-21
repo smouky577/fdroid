@@ -1,7 +1,7 @@
 # Dr. Baysinger – F-Droid хранилище
 
 Собствено F-Droid хранилище за **Real BC**, **Sound BC** и **SlugSpeed**.
-Всеки ден GitHub Actions взема последния APK от релийзите на трите репота, подписва индекса и го публикува на GitHub Pages.
+Всеки ден GitHub Actions проверява за нова версия, подписва индекса и го публикува на GitHub Pages. APK от релийза на апа се сваля само първия път, затова броят Downloads там не расте от служебното обновяване. Този брой е за сваляне от страницата на релийза. Инсталиране през F-Droid не влиза в него.
 
 **Адрес за F-Droid:** `https://smouky577.github.io/fdroid/repo`
 
@@ -44,7 +44,7 @@ Actions → **Update F-Droid repo** → Run workflow.
 # Dr. Baysinger – F-Droid repository
 
 A private F-Droid repository for **Real BC**, **Sound BC** and **SlugSpeed**.
-Once a day GitHub Actions takes the latest APK from each app’s releases, signs the index and publishes it on GitHub Pages.
+Once a day GitHub Actions checks for a new version, signs the index and publishes it on GitHub Pages. An APK is downloaded from the app release only the first time, so that release’s Downloads number does not grow from the daily update. That number counts downloads from the release page. Installing from F-Droid is not included.
 
 **F-Droid address:** `https://smouky577.github.io/fdroid/repo`
 
