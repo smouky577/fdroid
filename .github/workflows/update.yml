@@ -41,6 +41,7 @@ jobs:
           set -euo pipefail
           mkdir -p repo
           : > wanted.txt
+          : > wanted-cache.txt
 
           if ! gh release view apk-cache --repo "$SELF" >/dev/null 2>&1; then
             gh release create apk-cache --repo "$SELF" --draft \
@@ -53,6 +54,7 @@ jobs:
             line=${line%$'\r'}
             r=$(printf '%s' "${line%%#*}" | xargs)
             [ -z "$r" ] && continue
+            tag=$(gh release view --repo "smouky577/$r" --json tagName -q .tagName)
             gh release view --repo "smouky577/$r" --json assets -q '.assets[].name | select(endswith(".apk"))' > "names-$r.txt"
             if ! grep -q . "names-$r.txt"; then
               echo "No APK on the latest release of $r"
@@ -60,14 +62,26 @@ jobs:
             fi
             while IFS= read -r a || [ -n "${a:-}" ]; do
               [ -z "$a" ] && continue
+              # Cache key includes the tag. AirPulse.apk keeps the same file name
+              # on every release, so the name alone would serve a stale APK.
+              key="${r}__${tag}__${a}"
               printf '%s\n' "$a" >> wanted.txt
-              if grep -qxF "$a" cached.txt; then
-                echo "== $r: $a from cache, app download count unchanged"
+              if grep -qxF "$key" cached.txt; then
+                echo "== $r: $a ($tag) from cache, app download count unchanged"
+                gh release download apk-cache --repo "$SELF" --pattern "$key" --dir repo --clobber
+                mv -f "repo/$key" "repo/$a"
+                printf '%s\n' "$key" >> wanted-cache.txt
+              elif grep -qxF "$a" cached.txt; then
+                echo "== $r: $a from older cache name, app download count unchanged"
                 gh release download apk-cache --repo "$SELF" --pattern "$a" --dir repo --clobber
+                printf '%s\n' "$a" >> wanted-cache.txt
               else
-                echo "== $r: $a first time from the app release"
+                echo "== $r: $a ($tag) first time from the app release"
                 gh release download --repo "smouky577/$r" --pattern "$a" --dir repo --clobber
-                gh release upload apk-cache "repo/$a" --repo "$SELF" --clobber
+                cp "repo/$a" "repo/$key"
+                gh release upload apk-cache "repo/$key" --repo "$SELF" --clobber
+                rm -f "repo/$key"
+                printf '%s\n' "$key" >> wanted-cache.txt
               fi
             done < "names-$r.txt"
             rm -f "names-$r.txt"
@@ -81,7 +95,7 @@ jobs:
 
           while IFS= read -r a || [ -n "${a:-}" ]; do
             [ -z "$a" ] && continue
-            grep -qxF "$a" wanted.txt || { echo "removing cached $a"; gh release delete-asset apk-cache "$a" --repo "$SELF" --yes; }
+            grep -qxF "$a" wanted-cache.txt || { echo "removing cached $a"; gh release delete-asset apk-cache "$a" --repo "$SELF" --yes; }
           done < cached.txt
 
           echo "-- download counts on the app releases --"

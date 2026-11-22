@@ -1,0 +1,14 @@
+Categories:
+  - Science & Education
+License: GPL-3.0-only
+AuthorName: Dr. Baysinger
+SourceCode: https://github.com/smouky577/airpulse
+IssueTracker: https://github.com/smouky577/airpulse/issues
+
+Name: AirPulse
+Summary: See air flow and shock waves with the camera
+Description: |-
+  AirPulse uses the phone camera to show a pulse and air flow, including
+  background-oriented schlieren (BOS).
+
+  Камера за пулс и въздушен поток (BOS).

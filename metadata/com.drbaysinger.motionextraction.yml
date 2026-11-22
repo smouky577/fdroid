@@ -1,0 +1,14 @@
+Categories:
+  - Multimedia
+License: GPL-3.0-only
+AuthorName: Dr. Baysinger
+SourceCode: https://github.com/smouky577/motion-extraction
+IssueTracker: https://github.com/smouky577/motion-extraction/issues
+
+Name: Motion Extraction
+Summary: Show motion in color and still areas in gray
+Description: |-
+  Motion Extraction mixes the live camera image with a delayed, inverted frame.
+  Still areas turn gray. Anything that moves stays in color.
+
+  Забавен обърнат кадър: неподвижното става сиво, движението остава цветно.

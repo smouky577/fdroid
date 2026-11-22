@@ -2,3 +2,7 @@
 real-bc
 sound-bc
 slugspeed
+airpulse
+MediaStego
+motion-extraction
+temporal-fft

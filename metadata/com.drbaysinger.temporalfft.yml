@@ -1,0 +1,14 @@
+Categories:
+  - Science & Education
+License: GPL-3.0-only
+AuthorName: Dr. Baysinger
+SourceCode: https://github.com/smouky577/temporal-fft
+IssueTracker: https://github.com/smouky577/temporal-fft/issues
+
+Name: Temporal FFT
+Summary: Temporal FFT of every pixel in the camera
+Description: |-
+  Temporal FFT separates fast motion, slow motion, a frequency band, or the
+  spectrum for every pixel.
+
+  Бързо движение, бавно движение, честотна лента или спектър за всеки пиксел.

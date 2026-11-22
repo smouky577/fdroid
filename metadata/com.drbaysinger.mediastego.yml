@@ -1,0 +1,14 @@
+Categories:
+  - Security
+License: GPL-3.0-only
+AuthorName: Dr. Baysinger
+SourceCode: https://github.com/smouky577/MediaStego
+IssueTracker: https://github.com/smouky577/MediaStego/issues
+
+Name: MediaStego
+Summary: Hide encrypted text in a WAV or PNG
+Description: |-
+  MediaStego hides encrypted text, a file, or a voice recording inside a WAV
+  or PNG. The picture or sound looks the same.
+
+  Скрит криптиран текст, файл или глас в WAV или PNG.

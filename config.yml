@@ -1,8 +1,8 @@
 repo_url: https://smouky577.github.io/fdroid/repo
 repo_name: Dr. Baysinger
 repo_description: >-
-  Open source Android apps by Dr. Baysinger for air-rifle shooters:
-  ballistic coefficient and slug speed measurement.
+  Open source Android apps by Dr. Baysinger:
+  ballistics, sound, camera motion and hidden text.
 
 repo_keyalias: repokey
 keystore: keystore.p12
