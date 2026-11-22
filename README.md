@@ -1,6 +1,6 @@
 # Dr. Baysinger – F-Droid хранилище
 
-Собствено F-Droid хранилище за **Real BC**, **Sound BC**, **SlugSpeed**, **AirPulse**, **MediaStego**, **Motion Extraction** и **Temporal FFT**.
+Собствено F-Droid хранилище за **Real BC**, **Sound BC**, **SlugSpeed**, **AirPulse**, **MediaStego**, **Motion Extraction**, **Temporal FFT** и **Chrono app**.
 Всеки ден GitHub Actions проверява за нова версия, подписва индекса и го публикува на GitHub Pages. APK от релийза на апа се сваля само първия път, затова броят Downloads там не расте от служебното обновяване. Този брой е за сваляне от страницата на релийза. Инсталиране през F-Droid не влиза в него.
 
 **Адрес за F-Droid:** `https://smouky577.github.io/fdroid/repo`
@@ -34,7 +34,7 @@ Actions → **Update F-Droid repo** → Run workflow.
 ## Нова версия на апп
 Качете нов релийз с APK (по-висок `versionCode`, подписан с `main-release.jks`) в репото на аппа. Хранилището го хваща до 24 часа, или веднага с Run workflow.
 
-Последни версии в хранилището: Sound BC **1.2**, Real BC **1.1**, SlugSpeed **1.2**, AirPulse **1.2**, MediaStego **1.0.3**, Motion Extraction **1.21**, Temporal FFT **1.6**.
+Последни версии в хранилището: Sound BC **1.2**, Real BC **1.1**, SlugSpeed **1.2**, AirPulse **1.2**, MediaStego **1.0.3**, Motion Extraction **1.21**, Temporal FFT **1.6**, Chrono app **1.0.10**.
 
 ## Нов апп
 Добавете името на GitHub репото в `apps.txt` и файл `metadata/<applicationId>.yml`.
@@ -43,7 +43,7 @@ Actions → **Update F-Droid repo** → Run workflow.
 
 # Dr. Baysinger – F-Droid repository
 
-A private F-Droid repository for **Real BC**, **Sound BC**, **SlugSpeed**, **AirPulse**, **MediaStego**, **Motion Extraction** and **Temporal FFT**.
+A private F-Droid repository for **Real BC**, **Sound BC**, **SlugSpeed**, **AirPulse**, **MediaStego**, **Motion Extraction**, **Temporal FFT** and **Chrono app**.
 Once a day GitHub Actions checks for a new version, signs the index and publishes it on GitHub Pages. An APK is downloaded from the app release only the first time, so that release’s Downloads number does not grow from the daily update. That number counts downloads from the release page. Installing from F-Droid is not included.
 
 **F-Droid address:** `https://smouky577.github.io/fdroid/repo`
@@ -77,7 +77,7 @@ Actions → **Update F-Droid repo** → Run workflow.
 ## A new app version
 Publish a new release with an APK (higher `versionCode`, signed with `main-release.jks`) in that app’s repo. The repository picks it up within 24 hours, or immediately with Run workflow.
 
-Latest versions in the repository: Sound BC **1.2**, Real BC **1.1**, SlugSpeed **1.2**, AirPulse **1.2**, MediaStego **1.0.3**, Motion Extraction **1.21**, Temporal FFT **1.6**.
+Latest versions in the repository: Sound BC **1.2**, Real BC **1.1**, SlugSpeed **1.2**, AirPulse **1.2**, MediaStego **1.0.3**, Motion Extraction **1.21**, Temporal FFT **1.6**, Chrono app **1.0.10**.
 
 ## A new app
 Add the GitHub repo name to `apps.txt` and a `metadata/<applicationId>.yml` file.

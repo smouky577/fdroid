@@ -1,0 +1,14 @@
+Categories:
+  - Science & Education
+License: GPL-3.0-only
+AuthorName: Dr. Baysinger
+SourceCode: https://github.com/smouky577/chrono-app
+IssueTracker: https://github.com/smouky577/chrono-app/issues
+
+Name: Chrono app
+Summary: Live velocity and energy from an HT-X3006 chronograph
+Description: |-
+  Chrono app connects to HT-X3006 / HT-50 Wi-Fi chronographs and shows
+  live velocity, energy, shot history and a PDF export.
+
+  Връзка с хронограф HT-X3006 / HT-50: жива скорост, енергия, история и PDF.

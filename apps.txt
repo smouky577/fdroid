@@ -6,3 +6,4 @@ airpulse
 MediaStego
 motion-extraction
 temporal-fft
+chrono-app
