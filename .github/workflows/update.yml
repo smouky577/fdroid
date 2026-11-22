@@ -17,9 +17,6 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
 
@@ -134,5 +131,17 @@ jobs:
         with:
           path: _site
 
+  # Отделна стъпка, както изисква GitHub Pages: публикуването тръгва чак
+  # след като файлът вече е качен. Вчера сайтът беше 13 MB и същото пускане
+  # намираше файла. Сега е около 32 MB и публикуването тръгваше преди файлът
+  # да се появи. Повторно пускане на същото провалено задание трупа втори и
+  # трети файл със същото име и пак спира.
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - id: deployment
         uses: actions/deploy-pages@v4
